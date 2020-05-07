@@ -8,9 +8,12 @@ using namespace std;
 class Ships
 {
     public:
+    string name;
     vector<pair<string, int>> ship_bank;
 
-    Ships()
+    Ships() {};
+
+    Ships(string name) : name(name)
     {
         string ship_names[5] = {"carrier", "battleship", "destroyer", "submarine", "patrol boat"};
         int ship_length[5] = {5, 4, 3, 3, 2};

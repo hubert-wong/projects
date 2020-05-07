@@ -22,17 +22,7 @@ class Board {
     string inner_upper_layout[10][10]; //board itself without the numbers or the letters
     set<string> guesses;
     
-    Board()
-    {
-        for(int i = 0; i < 10; ++i)
-        {
-            for(int j = 0; j < 10; ++j)
-            {
-                inner_lower_layout[i][j] = "*";
-                inner_upper_layout[i][j] = "*";
-            }
-        }
-    }
+    Board() {};
 
     Board(string name) : name(name)
     {
@@ -94,8 +84,15 @@ class Board {
 
     void print_boards()
     {
+        cout << '\t' << "Upper Board" << endl;
         print_upper_board();
+        cout << '\t' << "Lower Board" << endl;
         print_lower_board();
+    }
+
+    string get_name()
+    {
+        return name;
     }
 
     int get_height()
@@ -141,7 +138,7 @@ class Board {
                 }
             }
         }
-        cout << "There are: " << num_lower_leftover << " empty spaces that can be guessed on your board." << endl;
+        cout << "There are: " << num_lower_leftover << " empty spaces on your board." << endl;
         return num_lower_leftover;
     }
 
@@ -177,6 +174,12 @@ class Board {
         }
         if(start_row == finish_row)
         {
+            if(finish_col < start_col)
+            {
+                int temp = start_col;
+                start_col = finish_col;
+                finish_col = temp;
+            }
             for(int col = start_col - 1; col < finish_col; ++col)
             {
                 if(inner_lower_layout[start_row][col] == "o")
@@ -192,6 +195,12 @@ class Board {
         }
         else if(start_col == finish_col)
         {
+            if(finish_row < start_row)
+            {
+                int temp = start_row;
+                start_row = finish_row;
+                finish_row = temp;
+            }
             for(int row = start_row; row < finish_row + 1; ++row)
             {
                 if(inner_lower_layout[row][start_col - 1] == "o")
@@ -252,9 +261,13 @@ class Board {
         {
             return 8;
         }
-        else
+        else if(letter == "J")
         {
             return 9;
+        }
+        else
+        {
+            return 100;
         }
     }
 };
