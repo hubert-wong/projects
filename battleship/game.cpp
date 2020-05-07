@@ -29,11 +29,23 @@ class Play_game
             //guesser.guesses.insert(guess) //maybe need this to actually insert it into the guesses?
             int row = reciever.string_conversion(guess.substr(0,1));
             int col = stoi(guess.substr(1));
-            if(reciever.inner_lower_layout[row][col] != "*" && reciever.inner_lower_layout[row][col] != " ")
+            if(reciever.inner_lower_layout[row][col-1] != "*" && reciever.inner_lower_layout[row][col] != " ")
             {
                 cout << "HIT!" << endl;
-                guesser.inner_upper_layout[row][col-1] = "x";
-                reciever.inner_lower_layout[row][col-1] = "x";
+                guesser.inner_upper_layout[row][col-1] = "w";
+                reciever.inner_lower_layout[row][col-1] = "w";
+                vector<string>::iterator erased = reciever.location.begin();
+                for(unsigned int i = 0; i < reciever.location.size(); ++i)
+                {
+                    if(guess == reciever.location.at(i))
+                    {
+                        reciever.location.erase(erased);
+                    }
+                    else
+                    {
+                        ++erased;
+                    }
+                }
                 return true;
             }
             else
@@ -47,34 +59,66 @@ class Play_game
 
         void fire()
         {
-            string display;
-            cout << "Player: " << p1_board.get_name() << " will go first. Would you like to see the hit board? (Y/N)" << endl;
-            cin >> display;
-            cout << "Take your guess!" << endl;
-            cin >> guess;
-            while(pewpew(guess, p1_board, p2_board))
+            bool gameplay = true;
+            int round = 1;
+            while(gameplay)
             {
-                if(display == "Y")
-                {
-                    p1_board.print_upper_board();
-                }
-                cout << "nice shot! go again!" << endl;
+                string display;
+                cout << "Player: " << p1_board.get_name() << " will go. Would you like to see the hit board? (Y/N)" << endl;
+                cin >> display;
+                cout << "Take your guess!" << endl;
                 cin >> guess;
+                while(pewpew(guess, p1_board, p2_board))
+                {
+                    if(display == "Y")
+                    {
+                        p1_board.print_upper_board();
+                    }
+                    cout << p2_board.location.size() << endl;
+                    if(p2_board.location.size() == 0)
+                    {
+                        gameplay = false;
+                        break;
+                    }
+                    cout << "nice shot! go again!" << endl;
+                    cin >> guess;
+                }
+                if(!gameplay)
+                {
+                    break;
+                }
+                cout << "dang miss! Player " << p2_board.get_name() << " it is your turn now. Would you like to see the hit board? (Y/N)" << endl;
+                cin >> display;
+                cout << "Take your guess!" << endl;
+                cin >> guess;
+                while(pewpew(guess, p2_board, p1_board))
+                {
+                    if(display == "Y")
+                    {
+                        p1_board.print_upper_board();
+                    }
+                    if(p1_board.location.size() == 0)
+                    {
+                        gameplay = false;
+                        break;
+                    }
+                    cout << "nice shot! go again!" << endl;
+                    cin >> guess;
+                }
+                cout << "round " << round << " done!" << endl;
+                ++round;
             }
-            cout << "dang miss! Player " << p2_board.get_name() << " it is your turn now. Would you like to see the hit board? (Y/N)" << endl;
-            cin >> display;
-            cout << "Take your guess!" << endl;
-            cin >> guess;
-            while(pewpew(guess, p2_board, p1_board))
+
+            if(p1_board.location.size() == 0)
             {
-                if(display == "Y")
-                {
-                    p1_board.print_upper_board();
-                }
-                cout << "nice shot! go again!" << endl;
-                cin >> guess;
+                cout << p2_board.get_name() << " has won the game! Congratulations."
+                << " On the other hand, " << p1_board.get_name() << " you suck." << endl;
             }
-            cout << "round done!" << endl;
+            else
+            {
+                cout << p1_board.get_name() << " has won the game! Congratulations."
+                << " On the other hand, " << p2_board.get_name() << " you suck." << endl; 
+            }
         }
 
         void ship_placement()   //cover edge case about making wrong points (not done)
@@ -108,7 +152,6 @@ class Play_game
                 p1_board.place_ship(starting_point, finishing_point, player1);
                 cout << endl;
             }
-            p1_board.lower_num_empty();
             cout << "Player: " << player2.name << " please place your ships." << endl;
             for(int i = 0; i < 5; ++i)
             {
@@ -118,7 +161,6 @@ class Play_game
                     cout << player2.ship_bank[j].first << " " << player2.ship_bank[j].second << '\t';
                 }
                 cout << endl;
-                p2_board.print_lower_board();
                 cout << "Please enter a valid starting point (A-J and 1-10): " << endl;
                 cin >> starting_point;
                 cout << "Please enter a valid finishing point (A-J and 1-10): " << endl;

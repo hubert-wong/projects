@@ -21,6 +21,7 @@ class Board {
     string inner_lower_layout[10][10]; //board itself without the numbers or the letters
     string inner_upper_layout[10][10]; //board itself without the numbers or the letters
     set<string> guesses;
+    vector<string> location;
     
     Board() {};
 
@@ -151,6 +152,7 @@ class Board {
         int h_length = abs(finish_col - start_col) + 1;
         int v_length = abs(finish_row - start_row) + 1;
         string ship = "";
+        string coordinate = "";
         if(player.ship_bank.size() == 0)
         {
             cout << "No more ships to place." << endl;
@@ -191,6 +193,8 @@ class Board {
             for(int col = start_col - 1; col < finish_col; ++col)
             {
                 inner_lower_layout[start_row][col] = "o";
+                coordinate = start.substr(0,1) + to_string(col+1);
+                location.push_back(coordinate);
             }
         }
         else if(start_col == finish_col)
@@ -212,6 +216,7 @@ class Board {
             for(int row = start_row; row < finish_row + 1; ++row)
             {
                 inner_lower_layout[row][start_col - 1] = "o";
+                coordinate = int_conversion(row) + int_conversion(start_col - 1);
             }
         }
         else
@@ -225,49 +230,96 @@ class Board {
 
     int string_conversion(string letter)
     {
-        if(letter == "A")
+        if(letter == "A" || letter == "a")
         {
             return 0;
         }
-        else if(letter == "B")
+        else if(letter == "B" || letter == "b")
         {
             return 1;
         }
-        else if(letter == "C")
+        else if(letter == "C" || letter == "c")
         {
             return 2;
         }
-        else if(letter == "D")
+        else if(letter == "D" || letter == "d")
         {
             return 3;
         }
-        else if(letter == "E")
+        else if(letter == "E" || letter == "e")
         {
             return 4;
         }
-        else if(letter == "F")
+        else if(letter == "F" || letter == "f")
         {
             return 5;
         }
-        else if(letter == "G")
+        else if(letter == "G" || letter == "g")
         {
             return 6;
         }
-        else if(letter == "H")
+        else if(letter == "H" || letter == "h")
         {
             return 7;
         }
-        else if(letter == "I")
+        else if(letter == "I" || letter == "i")
         {
             return 8;
         }
-        else if(letter == "J")
+        else if(letter == "J" || letter == "j")
         {
             return 9;
         }
         else
         {
             return 100;
+        }
+    }
+    string int_conversion(int num)
+    {
+        if(num == 0)
+        {
+            return "A";
+        }
+        else if(num == 1)
+        {
+            return "B";
+        }
+        else if(num == 2)
+        {
+            return "C";
+        }
+        else if(num == 3)
+        {
+            return "D";
+        }
+        else if(num == 4)
+        {
+            return "E";
+        }
+        else if(num == 5)
+        {
+            return "F";
+        }
+        else if(num == 6)
+        {
+            return "G";
+        }
+        else if(num == 7)
+        {
+            return "H";
+        }
+        else if(num == 8)
+        {
+            return "I";
+        }
+        else if(num == 9)
+        {
+            return "J";
+        }
+        else
+        {
+            return "wrong";
         }
     }
 };
