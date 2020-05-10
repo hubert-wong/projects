@@ -20,6 +20,8 @@ int year = 1900 + ct->tm_year;
 ///////////////////////boring time stuff end///////////////////////////////////////////
 string current_time = to_string(month) + "/" + to_string(day) + "/" + to_string(year);
 
+class cancelException {};   //exceptions custom class;
+
 
 int welcome_screen()
 {
@@ -45,54 +47,77 @@ void input_games(int decision, std::ostream& ofile)
     int num_titles;
     while(decision != 0)
     {
-        cout << "how many titles do you want to input?  ";
-        cin >> num_titles;
-        cin.ignore();
-        if(num_titles == 0)
+        try
         {
-            break;
-        }
-        if(decision == 1)
-        {
-            for(int i = 0; i < num_titles; ++i)
+            cout << "how many titles do you want to input?  ";
+            cin >> num_titles;
+            cin.ignore();
+            if(num_titles == 0)
             {
-                cout << "Enter the title of the game: ";
-                getline(cin, title);
-                ofile << "Nintendo Switch" << endl;
-                ofile << title << '\n' << current_time << endl;
+                break;
+            }
+            if(decision == 1)
+            {
+                for(int i = 0; i < num_titles; ++i)
+                {
+                    cout << "Enter the title of the game: ";
+                    getline(cin, title);
+                    if(title == "cancel" || title == "CANCEL")
+                    {
+                        throw cancelException();
+                    }
+                    ofile << "Nintendo Switch" << endl;
+                    ofile << title << '\n' << current_time << endl;
+                }
+            }
+            else if(decision == 2)
+            {
+                for(int i = 0; i < num_titles; ++i)
+                {
+                    cout << "Enter the title of the game: ";
+                    getline(cin, title);
+                    if(title == "cancel" || title == "CANCEL")
+                    {
+                        throw cancelException();
+                    }
+                    ofile << "PC" << endl;
+                    ofile << title << '\n' << current_time << endl;
+                }
+            }
+            else if(decision == 3)
+            {
+                for(int i = 0; i < num_titles; ++i)
+                {
+                    cout << "Enter the title of the game: ";
+                    getline(cin, title);
+                    if(title == "cancel" || title == "CANCEL")
+                    {
+                        throw cancelException();
+                    }
+                    ofile << "Playstation 4" << endl;
+                    ofile << title << '\n' << current_time << endl;
+                }
+            }
+            else if(decision == 4)
+            {
+                for(int i = 0; i < num_titles; ++i)
+                {
+                    cout << "Enter the title of the game: ";
+                    getline(cin, title);
+                    if(title == "cancel" || title == "CANCEL")
+                    {
+                        throw cancelException();
+                    }
+                    ofile << "Nintendo 3DS" << endl;
+                    ofile << title << '\n' << current_time << endl;
+                }
+            }
+            else
+            {
+                break;
             }
         }
-        else if(decision == 2)
-        {
-            for(int i = 0; i < num_titles; ++i)
-            {
-                cout << "Enter the title of the game: ";
-                getline(cin, title);
-                ofile << "PC" << endl;
-                ofile << title << '\n' << current_time << endl;
-            }
-        }
-        else if(decision == 3)
-        {
-            for(int i = 0; i < num_titles; ++i)
-            {
-                cout << "Enter the title of the game: ";
-                getline(cin, title);
-                ofile << "Playstation 4" << endl;
-                ofile << title << '\n' << current_time << endl;
-            }
-        }
-        else if(decision == 4)
-        {
-            for(int i = 0; i < num_titles; ++i)
-            {
-                cout << "Enter the title of the game: ";
-                getline(cin, title);
-                ofile << "Nintendo 3DS" << endl;
-                ofile << title << '\n' << current_time << endl;
-            }
-        }
-        else
+        catch(cancelException x)
         {
             break;
         }
@@ -106,15 +131,30 @@ void display(ifstream &ifile)
 {
     string to_print;
     int count = 0;
-    cout << "Console" << '\t' << '\t' << '\t' << " Title " << '\t' << '\t' << '\t' << '\t' << " Date " << endl;
+    int beginning_change = 0;
+    cout << "    Console" << '\t' << '\t' << '\t' << " Title " << '\t' << '\t' << '\t' << '\t' << "       Date added" << endl;
     while(getline(ifile, to_print))
     {
-        if(count == 3)
+        cout << to_print << '\t' << '\t';
+        if(count == 1 && to_print.length() < 20)
+        {
+            cout << '\t' << '\t';
+            if(to_print.length() <= 15)
+            {
+                cout << '\t';
+            }
+        }
+        if(beginning_change == 1)
+        {
+            cout << '\t';
+        }
+        if(count == 2)
         {
             count = 0;
             cout << endl;
+            continue;
         }
-        cout << to_print << '\t' << '\t';
+        ++beginning_change;
         ++count;
     }
     cout << endl;
