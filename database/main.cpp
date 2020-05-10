@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <ctime>
+#include <vector>
 
 using namespace std;
 
@@ -25,19 +26,20 @@ class cancelException {};   //exceptions custom class;
 
 int welcome_screen()
 {
-    cout << "xxx           xxx xxxxxxxxxxx xxx          xxxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxxxxxxxxx xxxxxxxxxxx" << endl;
-    cout << "xxx           xxx xxxxxxxxxxx xxx          xxxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxxxxxxxxx xxxxxxxxxxx" << endl;
-    cout << "xxx           xxx xxx         xxx          xxx         xxx      xxx xxx    xxx    xxx xxx        " << endl;
-    cout << "xxx           xxx xxx         xxx          xxx         xxx      xxx xxx    xxx    xxx xxx        " << endl;
-    cout << "xxx    xxx    xxx xxxxxxxxxxx xxx          xxx         xxx      xxx xxx    xxx    xxx xxxxxxxxxxx" << endl;
-    cout << "xxx    xxx    xxx xxxxxxxxxxx xxx          xxx         xxx      xxx xxx    xxx    xxx xxxxxxxxxxx" << endl;
-    cout << "xxx    xxx    xxx xxx         xxx          xxx         xxx      xxx xxx    xxx    xxx xxx        " << endl;
-    cout << "xxx    xxx    xxx xxx         xxx          xxx         xxx      xxx xxx    xxx    xxx xxx        " << endl;
-    cout << "xxxxxxxxxxxxxxxxx xxxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxxx xxxxxxxxxxxx xxx    xxx    xxx xxxxxxxxxxx" << endl;
-    cout << "xxxxxxxxxxxxxxxxx xxxxxxxxxxx xxxxxxxxxxxx xxxxxxxxxxx xxxxxxxxxxxx xxx    xxx    xxx xxxxxxxxxxx" << endl;
-    cout << "     Hubert Wong's Videogame Database that can keep being added to! Wow that's pretty cool.      " << '\n' << endl;
-    cout << "                                           Database Legend:                                     " << endl;
-    cout << "To cancel -> 0     Nintendo Switch -> 1      PC -> 2      Playstation 4 -> 3     Nintendo 3DS -> 4" << endl;
+    cout << "xxx           xxx  xxxxxxxxxxx  xxx           xxxxxxxxxxx  xxxxxxxxxxxx  xxxxxxxxxxxxxxxxx  xxxxxxxxxxx" << endl;
+    cout << "xxx           xxx  xxxxxxxxxxx  xxx           xxxxxxxxxxx  xxxxxxxxxxxx  xxxxxxxxxxxxxxxxx  xxxxxxxxxxx" << endl;
+    cout << "xxx           xxx  xxx          xxx           xxx          xxx      xxx  xxx    xxx    xxx  xxx        " << endl;
+    cout << "xxx           xxx  xxx          xxx           xxx          xxx      xxx  xxx    xxx    xxx  xxx        " << endl;
+    cout << "xxx    xxx    xxx  xxxxxxxxxxx  xxx           xxx          xxx      xxx  xxx    xxx    xxx  xxxxxxxxxxx" << endl;
+    cout << "xxx    xxx    xxx  xxxxxxxxxxx  xxx           xxx          xxx      xxx  xxx    xxx    xxx  xxxxxxxxxxx" << endl;
+    cout << "xxx    xxx    xxx  xxx          xxx           xxx          xxx      xxx  xxx    xxx    xxx  xxx        " << endl;
+    cout << "xxx    xxx    xxx  xxx          xxx           xxx          xxx      xxx  xxx    xxx    xxx  xxx        " << endl;
+    cout << "xxxxxxxxxxxxxxxxx  xxxxxxxxxxx  xxxxxxxxxxxx  xxxxxxxxxxx  xxxxxxxxxxxx  xxx    xxx    xxx  xxxxxxxxxxx" << endl;
+    cout << "xxxxxxxxxxxxxxxxx  xxxxxxxxxxx  xxxxxxxxxxxx  xxxxxxxxxxx  xxxxxxxxxxxx  xxx    xxx    xxx  xxxxxxxxxxx" << endl;
+    cout << '\n' << "     Hubert Wong's Videogame Database that can keep being added to! Wow that's pretty cool.      " << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+    cout << "                                           Database Legend:                                      " << endl;
+    cout << "To cancel -> 0     Nintendo Switch -> 1      PC -> 2      Playstation 4 -> 3    Nintendo 3DS -> 4" << endl;
     cin >> decision;
     return decision;
 }
@@ -127,7 +129,7 @@ void input_games(int decision, std::ostream& ofile)
     }
 }
 
-void display(ifstream &ifile)
+void display_sorted_by_date(ifstream &ifile)
 {
     string to_print;
     int count = 0;
@@ -160,15 +162,146 @@ void display(ifstream &ifile)
     cout << endl;
 }
 
+void helper_console(vector<vector<string>> &x)
+{
+    if(x.size() == 0)
+    {
+        return;
+    }
+    for(int j = 0; j < 3; ++j)
+    {
+        cout << x.at(0).at(j) << '\t' << '\t';
+        if(j == 1)
+        {
+            cout << '\t';
+            if(x.at(0).at(j).length() < 20)
+            {
+                cout << '\t' << '\t';
+            }
+        }
+    }
+    cout << endl;
+    for(unsigned int i = 1; i < x.size(); ++i)
+    {
+        for(int j = 0; j < 3; ++j)
+        {
+            cout << x.at(i).at(j) << '\t' << '\t';
+            if(j == 1 && x.at(i).at(j).length() < 20)
+            {
+                cout << '\t' << '\t';
+                if(x.at(i).at(j).length() <= 15)
+                {
+                    cout << '\t';
+                }
+            }
+        }
+        cout << endl;
+    }
+}
+
+void display_sorted_by_console(ifstream &ifile)
+{
+    vector<vector<string>> Switch;
+    vector<vector<string>> Playstation;
+    vector<vector<string>> PC;
+    vector<vector<string>> DS;
+    vector<string> entry;
+    string to_print;
+    bool switch0 = false;
+    bool playstation = false;
+    bool pc = false;
+    bool ds = false;
+    int count = 0;
+    while(getline(ifile, to_print))
+    {
+        if(entry.size() == 3)
+        {
+            if(switch0)
+            {
+                Switch.push_back(entry);
+                switch0 = false;
+                entry.clear();
+            }
+            else if(playstation)
+            {
+                Playstation.push_back(entry);
+                playstation = false;
+                entry.clear();
+            }
+            else if(pc)
+            {
+                PC.push_back(entry);
+                pc = false;
+                entry.clear();
+            }
+            else if(ds)
+            {
+                DS.push_back(entry);
+                ds = false;
+                entry.clear();
+            }
+        }
+
+        if(count == 0)
+        {
+            if(to_print == "Nintendo Switch")
+            {
+                switch0 = true;
+            }
+            else if(to_print == "Playstation 4")
+            {
+                playstation = true;
+            }
+            else if(to_print == "PC")
+            {
+                pc = true;
+            }
+            else if(to_print == "Nintendo 3DS")
+            {
+                ds = true;
+            }
+        }
+        entry.push_back(to_print);
+        if(count == 2)
+        {
+            count = 0;
+            continue;
+        }
+        ++count;
+    }
+    cout << "    Console" << '\t' << '\t' << '\t' << " Title " << '\t' << '\t' << '\t' << '\t' << "       Date added" << endl;
+    helper_console(Switch);
+    helper_console(Playstation);
+    helper_console(PC);
+    helper_console(DS);
+}
+
 
 int main(int argc, char* argv[])
 {
+    int display;
     ifstream ifile;
     ofstream ofile;
     ifile.open("database.txt", ifstream::app);
     ofile.open("database.txt", ofstream::app);
     int x = welcome_screen();
     input_games(x, ofile);
-    display(ifile);
+    cout << '\n' << "                 How do you want to display your games?" << endl;
+    cout << "No display -> 0       By increasing date of entry -> 1       By console -> 2" << endl;
+    cin >> display;
+    cout << '\t' << '\t' << "DISPLAY" << '\t' << '\t' << '\t'<< "DISPLAY" << '\t' << '\t' << '\t' << "DISPLAY";
+    cout << '\n' << "//////////////////////////////////////////////////////////////////////////////////////////////////////" << endl;
+    switch (display)
+    {
+    case 0:
+        break;
+    case 1:
+        display_sorted_by_date(ifile);
+        break;
+    case 2:
+        display_sorted_by_console(ifile);
+        break;
+    }
+    cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////" << '\n' << endl;
     return 0;
 }
