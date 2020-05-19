@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang = "en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to my website!</title>
+    <script src="script.js" async></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900,900i" type="text/css" media="all">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <button onclick = "topFunction()" id = "button" title = " Go to top">&#8593; Return to top &#8593;</button>
+    <header class = "head">
+        <h1>Hubert Wong</h1>
+        <div class = "directory">
+            <a href = "#aboutme">About Me</a>
+            <a href = "#projects">Projects</a>
+            <a href = "#experience">Experience</a>
+            <a href = "#coursework">Coursework</a>
+        </div> 
+    </header>
+    <main class = "aboutme">
+        <h1 id = "aboutme">About Me</h1>
+        <p>Hello there! My name is Hubert Wong and I am currently a 2nd year Computer 
+            Science major attending the University of Michigan: Ann Arbor. I am currently
+            learning the programming language C++ during my time in college. I have previous
+             knowledge of other programming languages that will be listed below. I would like to 
+             thank you for visiting my website and I hope you enjoy my creation.
+        </p>
+    </main>
+    <main class = "projects">
+        <h1 id = "projects">Projects</h1>
+        <div class = "slideshow-holder">
+            <div class = "slide fade">
+                <div class = "title">this do be a bruh moment</div>
+                <img src = "takagi san meme template.jpg" style = "width: 100%;">
+                <div class = "description">dang that sucks</div> 
+            </div>
+            <div class = "slide fade">
+                <div class = "title">she do be happy tho</div>
+                <img src = "happy kaguya.png" style = "width:100%">
+                <div class = "description">look at her go</div>
+            </div>
+
+            <a class = "prev" onclick = "moveslide(-1)">&#10094;</a>
+            <a class = "next" onclick = "moveslide(1)">&#10095;</a>
+        </div>
+        <br>
+
+        <div style = "text-align: center;">
+            <span class = "dot" onclick = "slidey(1)"></span>
+            <span class = "dot" onclick = "slidey(2)"></span>
+        </div>
+    </main>
+    <main class = "experience">
+        <h1 id = "experience">Experience</h1>
+        <p>I have coding experience in several languages and am currently learning C++ during 
+            my time in college. In addition, I also possess skills in other softwares used for 
+            organization and reports.
+        </p>
+        <div class = "list">
+            <div class = "column">
+                <h4>Back-end Development</h4>
+                <li>Java</li>
+                <li>Python</li>
+                <li>HTML</li>
+                <li>C++ (currently learning)</li>
+            </div>
+            <div class = "column">
+                <h4>Front-end Development</h4>
+                <li>Javascript</li>
+                <li>CSS</li>
+            </div>
+            <div class = "column">
+                <h4>Organizational Skills</h4>
+                <li>Proficient in Microsoft Office Suite</li>
+                <li>add something here</li>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
