@@ -21,6 +21,7 @@ h6 {
 	clear: both;
 }
 
+
 p {
 	margin-bottom: 1em;
 }
@@ -128,7 +129,7 @@ body {
     color: black;
     text-decoration: none;
     font-size: 20px;
-    width: 25%;
+    width: 23%;
     text-align: center;
     border-right: 2px solid white;
 }
@@ -171,32 +172,43 @@ h4 {
 }
 
 .aboutme h3 {
-    padding: 0;
-    text-align: left;
-    text-decoration: sandybrown;
-    font-style: italic;
+    text-align: center;
+    margin: 0 auto;
+    text-decoration: underline;
 }
 
 .aboutme p {
     padding-left: 2em;
     font-size: larger;
+    margin-bottom: 0.5px;
+}
+
+.aboutme a {
+    color: lightgray;
+}
+
+.aboutme a:visited {
+    color: lightgray;
 }
 
 .projects {
-    background-color: thistle;
+    background-image: url("background.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
     margin: 0;
-    text-align: left;
     padding: 0.5em 2em;
 }
+
 
 .projects h1 {
     text-align: center;
 }
 
-* {box-sizing:border-box}
 
 .slideshow-holder {
-    max-width: 1000px;
+    margin: 0 auto;
+    max-width: 400px;
     position: relative;
     margin: auto;
 }
@@ -205,30 +217,13 @@ h4 {
     display: none;
 }
 
-.title {
-    color: black;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    /* need to adjust to be in the middle */
-    left: 375px;
-    top: 0px;
-    background-color: green;
-    width: 25%;
-    text-align: center;
+
+#pix {
+    width: 400px;
+    height: 500px;
+    border-radius: 80px;
 }
 
-.description {
-    color: black;
-    font-size: 15px;
-    padding: 8px 12px;
-    position: absolute;
-    left: 375px;
-    bottom: 7px;
-    background-color: hotpink;
-    width: 25%;
-    text-align: center;
-}
 
 .prev, .next {
     cursor: pointer;
@@ -333,6 +328,72 @@ li {
 
 .coursework {
     background-color: powderblue;
+    text-align: left;
+    padding: 0.5em 2em;
+}
+
+.coursework p {
+    margin-bottom: 0;
+    padding-left: 2em;
+    font-size: larger;
+    color: black;
+    padding-bottom: 0;
+}
+
+.coursework dl {
+    text-align: left;
+    padding-left: 2em;
+}
+
+.coursetitle {
+    font-style: italic;
+}
+
+.forfun {
+    margin-bottom: 0;
+    background-image: url("https://media.giphy.com/media/QWFuXGOEiUeV8Y02BD/source.gif");
+    background-size: cover;
+    text-align: center;
+    padding: 0.5em 2em;
+}
+
+.forfun h1 {
+    text-align: center;
+    font-size: x-large;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.currenttask {
+    margin: 0 auto;
+    width: 50%;
+    padding: 0.5em;
+    background-color: red;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.currenttask a {
+    display: inline-block;
+    padding: 0 .5em;
+    font-size: 2em;
+    font-weight: 900;
+    color: #FFFCED;
+    text-decoration: none;
+    border: 3px solid #FFFCED;
+}
+
+.copyright {
+    padding: 0 0.5em;
+    text-align: center;
+    background-color: slategray;
+    color: whitesmoke;
+    font-size: x-small;
+}
+
+.copyright p {
+    margin: 0;
+    padding: 0;
 }
 
 /* ----------------------------------------------------------
@@ -344,7 +405,7 @@ li {
     position: fixed;
     bottom: 20px;
     right: 30px;
-    z-index: auto;
+    z-index: 99;
     font-size: 15px;
     border: none;
     outline: none;
@@ -357,4 +418,79 @@ li {
 
 #button:hover {
     background-color: blue;
+}
+
+/*---------------------------------------------------------
+                    Moving Clock
+---------------------------------------------------------*/
+
+.clockbox,
+#clock {
+    width: 100%;
+}
+
+/* Clock styles */
+.circle {
+    fill: none;
+    stroke: white;
+    stroke-width: 9;
+    stroke-miterlimit: 10;
+}
+
+.mid-circle {
+    fill: white;
+}
+.hour-marks {
+    fill: none;
+    stroke: white;
+    stroke-width: 9;
+    stroke-miterlimit: 10;
+}
+
+.hour-arm {
+    fill: none;
+    stroke: white;
+    stroke-width: 17;
+    stroke-miterlimit: 10;
+}
+
+.minute-arm {
+    fill: none;
+    stroke: white;
+    stroke-width: 11;
+    stroke-miterlimit: 10;
+}
+
+.second-arm {
+    fill: none;
+    stroke: white;
+    stroke-width: 4;
+    stroke-miterlimit: 10;
+}
+
+/* Transparent box ensuring arms center properly. */
+.sizing-box {
+    fill: none;
+}
+
+/* Make all arms rotate around the same center point. */
+/* Optional: Use transition for animation. */
+#hour,
+#minute,
+#second {
+    transform-origin: 300px 300px;
+    transition: transform .5s ease-in-out;
+}
+
+#digital_clock {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0 auto;
+    width: 30%;
+    color: #66ff99;
+    font-size: 56px;
+    text-align: center;
+    margin-top: 5px;
+    padding: 0;
+    background-color: black;
+    border-radius: 5px;
 }

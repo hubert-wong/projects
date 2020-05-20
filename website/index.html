@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to my website!</title>
+    <title>Hubert Wong</title>
+    <link rel = "icon" href = "icon.png">
     <script src="script.js" async></script>
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,700,700i,900,900i" type="text/css" media="all">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <button onclick = "topFunction()" id = "button" title = " Go to top">&#8593; Return to top &#8593;</button>
+    <button onclick = "topFunction()" id = "button" title = " Go to top" href = "#">&#8593; Return to top &#8593;</button>
     <header class = "head">
         <h1>Hubert Wong</h1>
         <div class = "directory">
@@ -24,24 +25,41 @@
     <main class = "aboutme">
         <h1 id = "aboutme">About Me</h1>
         <p>Hello there! My name is Hubert Wong and I am currently a 2nd year Computer 
-            Science major attending the University of Michigan: Ann Arbor. I am currently
+            Science major attending the <a href = "https://umich.edu/" target = "_blank">University of Michigan: Ann Arbor.</a> I am currently
             learning the programming language C++ during my time in college. I have previous
              knowledge of other programming languages that will be listed below. I would like to 
              thank you for visiting my website and I hope you enjoy my creation.
         </p>
+        <h3 style = 'margin-top: 1em;'>Helpful links to learn more about me:</h3>
+        <div class = "list">
+            <div class = "column">
+                <a href = "https://github.com/hubert-wong" target = "_blank"><img src = "github-logo.png" width = "20" height = "20">Codes</a>
+            </div>
+            <div class = "column">
+                <a href = "https://www.linkedin.com/in/hubert-wong-74b26a19a/" target = "_blank"><img src = "linkedin.png" width = "20" height = "20">Linkedin</a>
+            </div>
+            <div class = "column">
+                <a href = "mailto: hubert.wong2401@gmail.com" title = "hubert.wong2401@gmail.com"><img src = "gmail.png" width = "20" height = "20">My Email</a>
+            </div>
+        </div>
     </main>
     <main class = "projects">
         <h1 id = "projects">Projects</h1>
         <div class = "slideshow-holder">
             <div class = "slide fade">
-                <div class = "title">this do be a bruh moment</div>
-                <img src = "takagi san meme template.jpg" style = "width: 100%;">
-                <div class = "description">dang that sucks</div> 
+                <img src = "battleship.png" id = "pix">
             </div>
             <div class = "slide fade">
-                <div class = "title">she do be happy tho</div>
-                <img src = "happy kaguya.png" style = "width:100%">
-                <div class = "description">look at her go</div>
+                <img src = "database.png" id = "pix">
+            </div>
+            <div class = "slide fade">
+                <img src = "machine learning.png" id = "pix">
+            </div>
+            <div class = "slide fade">
+                <img src = "euchre.png" id = "pix">
+            </div>
+            <div class = "slide fade">
+                <img src = "image processing.png" id = "pix">
             </div>
 
             <a class = "prev" onclick = "moveslide(-1)">&#10094;</a>
@@ -52,10 +70,13 @@
         <div style = "text-align: center;">
             <span class = "dot" onclick = "slidey(1)"></span>
             <span class = "dot" onclick = "slidey(2)"></span>
+            <span class = "dot" onclick = "slidey(3)"></span>
+            <span class = "dot" onclick = "slidey(4)"></span>
+            <span class = "dot" onclick = "slidey(5)"></span>
         </div>
     </main>
     <main class = "experience">
-        <h1 id = "experience">Experience</h1>
+        <h1 id = "experience">Experience / Careers / Internships</h1>
         <p>I have coding experience in several languages and am currently learning C++ during 
             my time in college. In addition, I also possess skills in other softwares used for 
             organization and reports.
@@ -65,12 +86,12 @@
                 <h4>Back-end Development</h4>
                 <li>Java</li>
                 <li>Python</li>
-                <li>HTML</li>
                 <li>C++ (currently learning)</li>
             </div>
             <div class = "column">
                 <h4>Front-end Development</h4>
                 <li>Javascript</li>
+                <li>HTML</li>
                 <li>CSS</li>
             </div>
             <div class = "column">
@@ -80,6 +101,86 @@
             </div>
         </div>
     </main>
+    <main class = "coursework">
+        <h1 id = "coursework">Coursework</h1>
+        <p>Listed down below will be my relevant coursework with a short description about 
+            the class and the material that has been taught.
+        </p>
+        <dl>
+            <hr>
+            <dt><strong>ENGR 151</strong></dt>
+            <dd class = "coursetitle">Advanced Intro to Programming</dd>
+            <dd>An accelerated introduction to programming.</dd>
+            <dd>Worked with the Mathematical and Graphic Program: MATLAB.</dd>
+            <hr>
+            <dt><strong>EECS 203</strong></dt>
+            <dd class = "coursetitle">Discrete Mathmatics</dd>
+            <dd>Learning topics such as: Logic, Counting Methods, Discrete Structures, 
+                Discrete Probability, Asymptotic Notation, Algorithm Analysis, and Number Theory.</dd>
+            <hr>
+            <dt><strong>EECS 280</strong></dt>
+            <dd class = "coursetitle">Programming and Intro Data Structures</dd>
+            <dd>Computer science fundamentals, with programming in C++.</dd>
+            <dd>Created such things like: An Image Processing Program, a Web Backend, and a Machine Learning Algorithm.</dd>
+            <hr>
+            <dt><strong>EECS 281 (in progress)</strong></dt>
+            <dd class = "coursetitle">Data Structures and Algorithms</dd>
+            <dd>An Introduction to algorithm analysis and O-notation.</dd>
+            <dd>Used Fundamental Data Structures like: lists, stacks, queues, priority 
+                queues, hash tables, binary trees, search trees, balanced trees and graphs.</dd>
+            <dd>Used Algorithms like: searching and sorting algorithms; recursive algorithms; 
+                basic graph algorithms; an introduction to greedy algorithms and divide and conquer strategy.</dd>
+            <hr>
+            <dt><strong>EECS 370 (in progress)</strong></dt>
+            <dd class = "coursetitle">Introduction to Computer Organization</dd>
+            <dd>Learned how low-level language is executed by the hardware, and how to 
+                put together basic, hardware building blocks to form the functional units of a computer.</dd>
+            <dd>Describe the hardware in diagrams, finite-state machines, and hardware simulators (written in C).</dd>
+            <hr>
+            <dt><strong>STATS 250 (in progress)</strong></dt>
+            <dd class = "coursetitle">Introduction to Statistics and Data Analysis</dd>
+            <dd>Applied statistical methodology from an analysis-of-data viewpoint.</dd>
+            <dd>Learned methodology of: Frequency distributions; measures of location; 
+                mean, median, mode; measures of dispersion; variance; graphic presentation; 
+                elementary probability; populations and samples; sampling distributions; one 
+                sample univariate inference problems, and two sample problems; categorical data; 
+                regression and correlation; and analysis of variance.</dd>
+            <hr>
+        </dl>
+    </main>
+    <main class = "forfun">
+        <h1>My daily Routine:</h1>
+        <div class="clockbox">
+            <svg id="clock" xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+                <g id="face">
+                    <circle class="circle" cx="300" cy="300" r="253.9"/>
+                    <path class="hour-marks" d="M300.5 94V61M506 300.5h32M300.5 506v33M94 300.5H60M411.3 107.8l7.9-13.8M493 190.2l13-7.4M492.1 411.4l16.5 9.5M411 492.3l8.9 15.3M189 492.3l-9.2 15.9M107.7 411L93 419.5M107.5 189.3l-17.1-9.9M188.1 108.2l-9-15.6"/>
+                    <circle class="mid-circle" cx="300" cy="300" r="16.2"/>
+                </g>
+                <g id="hour">
+                    <path class="hour-arm" d="M300.5 298V142"/>
+                    <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+                </g>
+                <g id="minute">
+                    <path class="minute-arm" d="M300.5 298V67"/>
+                    <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+                </g>
+                <g id="second">
+                    <path class="second-arm" d="M300.5 350V55"/>
+                    <circle class="sizing-box" cx="300" cy="300" r="253.9"/>
+                </g>
+            </svg>
+        </div><!-- .clockbox -->
+        <div id = "digital_clock"></div>
+        <br>
+        <div class = "currenttask">
+            <a href = "#" title = "click it!">Click on me to learn what I'm doing right now!</a>
+        </div>
+    </main>
+    <div class = "copyright">
+        <a></a>
+        <p>Website made using Javascript, CSS, and HTML</p>
+    </div>
 </body>
 
 </html>
