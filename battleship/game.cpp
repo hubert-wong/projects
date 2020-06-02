@@ -181,11 +181,21 @@ class Play_game
         }
 };
 
+void play(string p1, string p2)
+{
+    Play_game x(p1, p2);
+    x.ship_placement();
+    x.fire();
+}
 
 int main()
 {
-    Play_game x("Hubert", "Lance");
-    x.ship_placement();
-    x.fire();
+    string p1;
+    string p2;
+    cout << "Welcome to Battleship! Please enter the two players names: " << endl;
+    cin >> p1; 
+    cin >> p2;
+    cout << "Good luck and have fun: " << p1 << " and " << p2 << "!" << endl;
+    play(p1, p2);
     return 0;
 }

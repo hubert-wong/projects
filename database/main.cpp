@@ -138,10 +138,18 @@ void display_sorted_by_date(ifstream &ifile)
     while(getline(ifile, to_print))
     {
         cout << to_print << '\t' << '\t';
-        if(count == 1 && to_print.length() < 20)
+        if(count == 1 && to_print.length() <= 25)
         {
-            cout << '\t' << '\t';
-            if(to_print.length() <= 15)
+            cout << '\t';
+            if(to_print.length() == 23)
+            {
+                cout << '\t';
+            }
+            else if(to_print.length() <= 20)
+            {
+                cout << '\t' << '\t';
+            }
+            else if(to_print.length() <= 15)
             {
                 cout << '\t';
             }
@@ -173,11 +181,12 @@ void helper_console(vector<vector<string>> &x)
         cout << x.at(0).at(j) << '\t' << '\t';
         if(j == 1)
         {
-            cout << '\t';
-            if(x.at(0).at(j).length() < 20)
-            {
-                cout << '\t' << '\t';
-            }
+            // cout << '\t';
+            // if(x.at(0).at(j).length() < 20)
+            // {
+            //     cout << '\t' << '\t';
+            // }
+            break;
         }
     }
     cout << endl;
@@ -186,20 +195,24 @@ void helper_console(vector<vector<string>> &x)
         for(int j = 0; j < 3; ++j)
         {
             cout << x.at(i).at(j) << '\t' << '\t';
-            if(j == 1 && x.at(i).at(j).length() < 20)
+            if(j == 1)
             {
-                cout << '\t' << '\t';
-                if(x.at(i).at(j).length() <= 15)
-                {
-                    cout << '\t';
-                }
+                break;
             }
+            // else if(j == 1 && x.at(i).at(j).length() < 20)
+            // {
+            //     cout << '\t' << '\t';
+            //     if(x.at(i).at(j).length() <= 15)
+            //     {
+            //         cout << '\t';
+            //     }
+            // }
         }
         cout << endl;
     }
 }
 
-void display_sorted_by_console(ifstream &ifile)
+void display_sorted_by_console(ifstream &ifile, int choice)
 {
     vector<vector<string>> Switch;
     vector<vector<string>> Playstation;
@@ -269,11 +282,30 @@ void display_sorted_by_console(ifstream &ifile)
         }
         ++count;
     }
-    cout << "    Console" << '\t' << '\t' << '\t' << " Title " << '\t' << '\t' << '\t' << '\t' << "       Date added" << endl;
-    helper_console(Switch);
-    helper_console(Playstation);
-    helper_console(PC);
-    helper_console(DS);
+    cout << "    Console" << '\t' << '\t' << '\t' << " Title " << endl;
+    if(choice == 1)
+    {
+       helper_console(Switch); 
+    }
+    else if(choice == 2)
+    {
+        helper_console(Playstation);
+    }
+    else if(choice == 3)
+    {
+        helper_console(PC);
+    }
+    else if(choice == 4)
+    {
+        helper_console(DS);
+    }
+    else
+    {
+        helper_console(Switch);
+        helper_console(Playstation);
+        helper_console(PC);
+        helper_console(DS);
+    }
 }
 
 
@@ -299,7 +331,12 @@ int main(int argc, char* argv[])
         display_sorted_by_date(ifile);
         break;
     case 2:
-        display_sorted_by_console(ifile);
+        int display_choice;
+        cout << "Would you like to display all consoles? Or separate consoles?" << endl;
+        cout << "Display all -> 0       Nintendo Switch -> 1       Playstation 4 -> 2       PC -> 3       Nintendo 3DS -> 4" << endl;
+        cin >> display_choice;
+        cout << '\n' << endl;
+        display_sorted_by_console(ifile, display_choice);
         break;
     }
     cout << "//////////////////////////////////////////////////////////////////////////////////////////////////////" << '\n' << endl;
