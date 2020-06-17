@@ -181,11 +181,11 @@ void helper_console(vector<vector<string>> &x)
         cout << x.at(0).at(j) << '\t' << '\t';
         if(j == 1)
         {
-            // cout << '\t';
-            // if(x.at(0).at(j).length() < 20)
-            // {
-            //     cout << '\t' << '\t';
-            // }
+            cout << '\t';
+            if(x.at(0).at(j).length() < 20)
+            {
+                cout << '\t' << '\t';
+            }
             break;
         }
     }
@@ -254,7 +254,6 @@ void display_sorted_by_console(ifstream &ifile, int choice)
                 entry.clear();
             }
         }
-
         if(count == 0)
         {
             if(to_print == "Nintendo Switch")
